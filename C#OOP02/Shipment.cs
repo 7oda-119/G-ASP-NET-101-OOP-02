@@ -117,7 +117,7 @@ namespace C_OOP02
             Console.WriteLine($"Description: {Description}");
             Console.WriteLine($"Weight: {Weight}");
             Console.WriteLine($"DeliveryFee: {DeliveryFee}");
-            Console.WriteLine($"Destination: {Destination.GetFullAddress}");
+            Console.WriteLine($"Destination: {Destination.GetFullAddress()}");
             Console.WriteLine($"EstimatedCost: {EstimatedCost}");
 
         }

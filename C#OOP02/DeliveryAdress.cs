@@ -8,7 +8,7 @@ namespace C_OOP02
     {
         public string city;
         public string street;
-        public int buildingNumber;
+        public int buildingNumber;  
 
         public DeliveryAddress(string city, string street, int buildingNumber)
         {
