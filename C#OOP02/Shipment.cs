@@ -99,5 +99,29 @@ namespace C_OOP02
 
         #endregion
 
+        #region Question04
+        //3. Add the following methods to Shipment:
+        //• UpdateDeliveryFee(decimal newFee) : updates the fee only when newFee is greater than 0.
+        //• PrintShipment() : prints all shipment information, including the estimated cost.
+
+        public void UpdateDeliveryFee(decimal newFee)
+        {
+            if (newFee > 0)
+                DeliveryFee = (double)newFee;
+        }
+
+        public void PrintShipment()
+        {
+            Console.WriteLine("Shipment information: ");
+            Console.WriteLine($"TracingCode: {TrackingCode}");
+            Console.WriteLine($"Description: {Description}");
+            Console.WriteLine($"Weight: {Weight}");
+            Console.WriteLine($"DeliveryFee: {DeliveryFee}");
+            Console.WriteLine($"Destination: {Destination.GetFullAddress}");
+            Console.WriteLine($"EstimatedCost: {EstimatedCost}");
+
+        }
+        #endregion
+
     }
 }
