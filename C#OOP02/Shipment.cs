@@ -10,7 +10,6 @@ namespace C_OOP02
         string description;
         double weight;
         double deliveryFee;
-        DeliveryAddress destination;
 
         #region Constructors
         //The first constructor receives only trackingCode.
@@ -26,7 +25,7 @@ namespace C_OOP02
             description = "Unknown";
             weight = 1;
             deliveryFee = 50;
-            destination = new DeliveryAddress("New York", "5th Avenue", 100);
+            Destination = new DeliveryAddress("New York", "5th Avenue", 100);
         }
 
         public Shipment(string trackingCode, string description, double weight, double deliveryFee, DeliveryAddress destination)
@@ -44,8 +43,60 @@ namespace C_OOP02
             this.description = description;
             this.weight = weight;
             this.deliveryFee = deliveryFee;
-            this.destination = destination;
+            Destination = destination;
         }
+        #endregion
+
+
+        #region Properities
+        // Automatic Read-Write Properity
+        public DeliveryAddress Destination { get; set; }
+
+        // Read only properity
+        public string TrackingCode
+        {
+            get => trackingCode;
+        }
+
+        // Read-Write Properity
+        public string Description
+        {
+            get => description;
+            set
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                    description = value;
+            }
+        }
+
+        // Read-Write Properity
+        public double Weight
+        {
+            get => weight;
+            set
+            {
+                if (value > 0)
+                    weight = value;
+            }
+        }
+
+        // Read-private set properity  ==> can be accesed only in the same class
+        public double DeliveryFee
+        {
+            get => deliveryFee;
+            private set
+            {
+                if (value > 0)
+                    deliveryFee = value;
+            }
+        }
+
+        // Calculated Properity
+        public double EstimatedCost
+        {
+            get => deliveryFee + (weight * 5);
+        }
+
         #endregion
 
     }
