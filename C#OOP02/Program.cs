@@ -151,7 +151,190 @@
             */
             #endregion
             #endregion
+
+            #region Question05
+
+            string trackingCode, description, city, street, destinationCountry;
+            double weight, deliveryFee ;
+            decimal extraFee, customsFee ;
+            int buildingNumber;
+
+            #region DeliveryCenter
+            // Create a DeliveryCenter and read the center name from the user.
+            Console.Write("Enter Delivery Center name: ");
+            string centerName = Console.ReadLine();
+            DeliveryCenter deliveryCenter = new DeliveryCenter(centerName); 
             #endregion
+
+            //Create one StandardShipment and read the data from user.
+            #region StandardShipment
+            Console.WriteLine("===== Enter StandardShipment data =====");
+
+            trackingCode = ReadString("Tracking code: ");
+
+            description = ReadString("Description: ");
+
+            weight = ReadDouble("Weight: ");
+            
+            deliveryFee = ReadDouble("Delivery fee: ");
+            
+            city = ReadString("City: ");
+
+            street = ReadString("Street: ");
+
+            buildingNumber = ReadInt("Building number: ");
+            
+            DeliveryAddress sAddress = new DeliveryAddress(city, street, buildingNumber);
+            Shipment standardShipment = new StandardShipment(trackingCode, description, weight, deliveryFee, sAddress); 
+            #endregion
+
+
+            //Create one ExpressShipment and read the data from user.
+            #region ExpressShipment
+
+            Console.WriteLine("===== Enter ExpressShipment data =====");
+
+            trackingCode = ReadString("Tracking code: ");
+
+            description = ReadString("Description: ");
+
+            weight = ReadDouble("Weight: ");
+
+            deliveryFee = ReadDouble("Delivery fee: ");
+
+            city = ReadString("City: ");
+
+            street = ReadString("Street: ");
+
+            buildingNumber = ReadInt("Building number: ");
+
+            DeliveryAddress eAddress = new DeliveryAddress(city, street, buildingNumber);
+
+            extraFee = ReadDecimal("Extra Fee: ");
+            
+            Shipment expressShipment = new ExpressShipment(trackingCode, description, weight, deliveryFee, eAddress, extraFee); 
+            #endregion
+
+
+            //Create one InternationalShipment and read the data from user.
+            #region InternationalShipment
+            Console.WriteLine("===== Enter InternationalShipment data =====");
+
+            trackingCode = ReadString("Tracking code: ");
+
+            description = ReadString("Description: ");
+
+            weight = ReadDouble("Weight: ");
+
+            deliveryFee = ReadDouble("Delivery fee: ");
+
+            city = ReadString("City: ");
+
+            street = ReadString("Street: ");
+
+            buildingNumber = ReadInt("Building number: ");
+            DeliveryAddress iAddress = new DeliveryAddress(city, street, buildingNumber);
+
+            destinationCountry = ReadString("Destination country: ");
+
+            customsFee = ReadDecimal("Customs fee: ");
+
+            Shipment internationalShipment = new InternationalShipment(trackingCode, description, weight, deliveryFee, iAddress, destinationCountry, customsFee);
+
+            #endregion
+
+            //Add the shipments to the delivery center.
+            #region Add all shipments
+            deliveryCenter.AddShipment(standardShipment);
+            deliveryCenter.AddShipment(expressShipment);
+            deliveryCenter.AddShipment(internationalShipment);
+            #endregion
+
+            //Print all shipments.
+            #region Print all shipments
+            Console.WriteLine("======== All Shipments ========");
+            deliveryCenter.PrintAllShipments();
+            #endregion
+
+            Console.WriteLine("***************************************");
+
+            //Search for a shipment using the existing tracking code indexer
+            #region Search for shipment
+            string searchCode = ReadString("Enter tracking code to search: ");
+            Shipment found = deliveryCenter[searchCode];
+            if (found != null)
+                found.PrintShipment();
+            else
+                Console.WriteLine("Shipment not found.");
+            #endregion
+
+            Console.WriteLine("***************************************");
+
+            //Remove one shipment using its tracking code.
+            #region Remove shipment
+            string removeCode = ReadString("Enter tracking code to remove: ");
+            if(deliveryCenter.RemoveShipment(removeCode))
+                Console.WriteLine("The shipment is deleted successfully");
+            else
+                Console.WriteLine("The shipment is not existed");
+            #endregion
+
+            Console.WriteLine("***************************************");
+
+            //Print the remaining shipments.
+            #region Print the shipments
+            Console.WriteLine("======== Remaining Shipments ========");
+            deliveryCenter.PrintAllShipments(); 
+            #endregion
+
+            #endregion
+
+            #endregion
+        }
+
+        static int ReadInt(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+
+                if (int.TryParse(Console.ReadLine(), out int value))
+                    return value;
+
+                Console.WriteLine("Invalid number. Try again.");
+            }
+        }
+
+        static double ReadDouble(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+
+                if (double.TryParse(Console.ReadLine(), out double value))
+                    return value;
+
+                Console.WriteLine("Invalid number. Try again.");
+            }
+        }
+
+        static decimal ReadDecimal(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+
+                if (decimal.TryParse(Console.ReadLine(), out decimal value))
+                    return value;
+
+                Console.WriteLine("Invalid number. Try again.");
+            }
+        }
+
+        static string ReadString(string message)
+        {
+            Console.Write(message);
+            return Console.ReadLine();
         }
     }
 }
