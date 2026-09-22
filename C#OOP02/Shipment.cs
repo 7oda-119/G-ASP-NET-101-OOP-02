@@ -92,9 +92,9 @@ namespace C_OOP02
         }
 
         // Calculated Properity
-        public double EstimatedCost
+        public virtual decimal EstimatedCost   // Add the virtual keyword so the property can be overridden
         {
-            get => deliveryFee + (weight * 5);
+            get => (decimal)(deliveryFee + (weight * 5));
         }
 
         #endregion
