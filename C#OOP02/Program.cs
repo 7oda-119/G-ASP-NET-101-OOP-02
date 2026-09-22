@@ -108,7 +108,50 @@
             #endregion
             #endregion
 
+            #region OOP02
+            #region Theoretical Questions
+            #region Question01
+            //a) What is the difference between a class and a struct?
+            /*    == Key difference ==       == Class ==                       == Struct ==
+             *    Type                       Reference type                    Value Type
+             *    Memory location            Heap                              Stack(or inline in heap if field of a class)
+             *    Assignment behaviour       Copies references                 Copies value
+             *    Inheritane                 Support inheritane                Doens't support inheritance
+             *    Default value              Null                              Zero-initialized instance
+             *    Can be null                Yes                               No (unless nullable)
+             *    Best for                   Large data, Shared state          Small and sinple data
+             */
 
+            //b) Why are classes more suitable than structs for large applications?
+            /* Answer: 1. Classes are stored on the heap, managed by the garbage collector, which is ideal for long‑lived, complex objects.
+             *         while Structs are stored on the stack, in large structs can cause performance issues (stack over flow)
+             *         2. Class support inheritance this mean wriing shared logic once in the base class.
+            */
+            #endregion
+
+            #region Question02
+            /* public class Shipment
+             * {
+             *      public string TracingCode { get; set; }
+             * }
+             * public class ExpressShipment : Shipment
+             * {
+             * public decimal ExtraFee { get; set }
+             * }
+             * a) Which class is the parent class? Answer: Parent class is Shipment
+             * b) Which class is the child class?  Answer: Child class is ExpressShipment
+             * c) What members are inherited by ExpressShipment? Answer: Members are inherited is TracingCode properity
+             * d) Why is inheritance better than duplicating the same code in multiple classes?
+             *    Answer: Easier Maintenance:
+                            If you need to fix or improve shared functionality, you do it once in the parent class.
+                            All child classes instantly benefit from the change, reducing bugs and saving time.
+                          Code Reusability:
+                            When a child class inherits from a parent class, it automatically gains access to all the parent’s fields and methods.
+                            This means you don’t have to rewrite the same logic in every class — you just reuse it.
+            */
+            #endregion
+            #endregion
+            #endregion
         }
     }
 }
