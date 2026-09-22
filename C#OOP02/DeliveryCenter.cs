@@ -7,10 +7,12 @@ namespace C_OOP02
     internal class DeliveryCenter
     {
         Shipment[] shipments;
+        public string CenterName { get; set; }
 
-        public DeliveryCenter()
+        public DeliveryCenter(string centerName)
         {
-            shipments = new Shipment[10];
+            CenterName = centerName;
+            shipments = new Shipment[20];
         }
 
         // Add an integer indexer
@@ -42,7 +44,7 @@ namespace C_OOP02
             {
                 for (int i = 0; i < shipments.Length; i++)
                 {
-                    if (shipments[i].TrackingCode == trackingCode)
+                    if (shipments[i] != null && shipments[i].TrackingCode == trackingCode)
                         return shipments[i];
                 }
                 return default;
@@ -54,13 +56,43 @@ namespace C_OOP02
         {
             for(int i = 0; i < shipments.Length; i++)
             {
-                if (string.IsNullOrWhiteSpace(shipments[i].TrackingCode))  //The condition (shipments[i] == null) =>compiler error becaue shipment is a struct can;t be null
+                if (shipments[i] == null)  
                 {
                     shipments[i] = shipment;
                     return true;
                 }
             }
             return false;
+        }
+
+        //Remove the shipment with tracking code
+        public bool RemoveShipment(string trackingCode)
+        {
+            for (int i = 0; i < shipments.Length; i++)
+            {
+                if (shipments[i] != null &&  shipments[i] != null &&shipments[i].TrackingCode == trackingCode)
+                {
+                    shipments[i] = null;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void PrintAllShipments()
+        {
+            bool hasShipment = false;
+            for(int i = 0; i < shipments.Length; i++)
+            {
+                if (shipments[i] != null)
+                {
+                    Console.WriteLine($"== Shipment number {i+1} ==");
+                    shipments[i].PrintShipment();
+                    hasShipment = true;
+                }
+            }
+            if(!hasShipment)
+                Console.WriteLine("No shipments stored in this center.");
         }
     }
 }

@@ -112,7 +112,6 @@ namespace C_OOP02
 
         public void PrintShipment()
         {
-            Console.WriteLine("Shipment information: ");
             Console.WriteLine($"TracingCode: {TrackingCode}");
             Console.WriteLine($"Description: {Description}");
             Console.WriteLine($"Weight: {Weight}");
